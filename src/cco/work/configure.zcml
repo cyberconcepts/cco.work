@@ -1,0 +1,14 @@
+<configure
+   xmlns:zope="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="cco.work">
+
+  <zope:adapter factory="cco.work.task.Project" trusted="True" />
+  <zope:class class="cco.work.task.Project">
+    <require permission="zope.View"
+             interface="cco.work.interfaces.IProject" />
+    <require permission="zope.ManageContent"
+             set_schema="cco.work.interfaces.IProject" />
+  </zope:class>
+
+</configure>
