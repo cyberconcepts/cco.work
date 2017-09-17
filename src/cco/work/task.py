@@ -20,10 +20,13 @@
 Implementation of cco.work concepts.
 """
 
+from zope.cachedescriptors.property import Lazy
 from zope.interface import implements
 
-from loops.common import AdapterBase
+from cybertools.organize.interfaces import IWorkItems
+from loops.common import AdapterBase, adapted, baseObject
 from loops.type import TypeInterfaceSourceList
+from loops import util
 from cco.work.interfaces import IProject, ITask
 
 
@@ -32,12 +35,24 @@ TypeInterfaceSourceList.typeInterfaces += (IProject, ITask)
 
 class TaskBase(AdapterBase):
 
+    defaultStates = ['done', 'done_x', 'finished', 'finished_x']
+
     @property
     def actualEffort(self):
-        return 0
+        result = 0.0
+        for t in self.getAllTasks():
+            for wi in t.getWorkItems():
+                result += wi.effort
+        return formatTimeDelta(result)
+        #return result / 3600.0
 
     def getSubTasks(self):
-        return []
+        result = []
+        for c in baseObject(self).getChildren():
+            obj = adapted(c)
+            if IProject.providedBy(obj) or ITask.providedBy(obj):
+                result.append(obj)
+        return result
 
     def getAllTasks(self):
         result = set([self])
@@ -48,8 +63,19 @@ class TaskBase(AdapterBase):
                         result.add(t2)
         return result
 
-    def getWorkItems(self, crit=None):
-        return []
+    @Lazy
+    def workItems(self):
+        rm = self.getLoopsRoot().getRecordManager()
+        return IWorkItems(rm['work'])
+
+    def addWorkItem(self, party, action='plan', **kw):
+        wi = self.workItems.add(util.getUidForObject(baseObject(self)), party)
+        wi.doAction(action, party, **kw)
+
+    def getWorkItems(self, crit={}):
+        kw = dict(task=util.getUidForObject(baseObject(self)), 
+                  state=crit.get('states') or self.defaultStates)
+        return self.workItems.query(**kw)
 
 
 class Project(TaskBase):
@@ -72,4 +98,15 @@ class Task(TaskBase):
 
     _adapterAttributes = AdapterBase._adapterAttributes + ('actualEffort',)
     _contextAttributes = list(IProject)
+
+
+# utility functions
+
+def formatTimeDelta(value):
+    if not value:
+        return u'0:00'
+    h, m = divmod(int(value) / 60, 60)
+    if h > 24:
+        return str(int(round(h / 24.0)))
+    return u'%i:%02i' % (h, m)
 

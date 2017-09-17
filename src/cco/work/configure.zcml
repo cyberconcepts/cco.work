@@ -11,4 +11,12 @@
              set_schema="cco.work.interfaces.IProject" />
   </zope:class>
 
+  <zope:adapter factory="cco.work.task.Task" trusted="True" />
+  <zope:class class="cco.work.task.Task">
+    <require permission="zope.View"
+             interface="cco.work.interfaces.ITask" />
+    <require permission="zope.ManageContent"
+             set_schema="cco.work.interfaces.ITask" />
+  </zope:class>
+
 </configure>
