@@ -45,8 +45,8 @@ class TaskBase(AdapterBase):
         for t in self.getAllTasks():
             for wi in t.getWorkItems():
                 result += wi.effort
-        return formatTimeDelta(result)
-        #return result / 3600.0
+        #return formatTimeDelta(result)
+        return round(result / 3600.0, 2)
 
     def getSubTasks(self):
         result = []

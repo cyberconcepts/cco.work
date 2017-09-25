@@ -55,20 +55,26 @@ The actual effort for the project is 0.0 because there aren't any work items
 assigned to any of the tasks.
   
   >>> proj01.actualEffort
-  u'0:00'
+  0.0
+
+u'0:00'
 
 So if we add work items the corresponding efforts are summed up.
 
   >>> task01.addWorkItem('4711', 'work', effort=15 * 3600)
   >>> proj01.actualEffort
-  u'15:00'
+  15.0
+  
+u'15:00'
 
   >>> task02 = adapted(addAndConfigureObject(concepts, Concept, 'task02', 
   ...             title=u'Task #2', conceptType=task))
   >>> baseObject(task02).assignParent(baseObject(proj01))
   >>> task02.addWorkItem('4711', 'work', effort=8 * 3600)
   >>> proj01.actualEffort
-  u'23:00'
+  23.0
+
+u'23:00'
 
 
 Reporting

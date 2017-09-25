@@ -21,9 +21,11 @@ Report class(es) for the cco.work package.
 """
 
 from cybertools.util.jeep import Jeep
+from loops.common import adapted, baseObject
 from loops.expert.field import Field, DecimalField, TargetField, UrlField
 from loops.expert.report import ReportInstance
 from loops.organize.work.report import DurationField
+from cco.work.interfaces import IProject, ITask
 
 
 task = UrlField('title', u'Task',
@@ -39,9 +41,14 @@ class TasksOverview(ReportInstance):
     type = 'cco.work.tasks_overview'
     label = u'Tasks Overview'
 
-    fields = Jeep((task,))
+    fields = Jeep((task, estimatedEffort, actualEffort))
     defaultOutputFields = fields
     defaultSortCriteria = (task,)
 
     def selectObjects(self, parts):
-        return []
+        result = []
+        for c in baseObject(self.view.adapted).getChildren():
+            obj = adapted(c)
+            if IProject.providedBy(obj) or ITask.providedBy(obj):
+                result.append(obj)
+        return result
