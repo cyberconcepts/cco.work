@@ -12,7 +12,7 @@ cco.work - cyberconcepts.org: project and task management stuff
 
   >>> concepts = loopsRoot['concepts']
   >>> len(list(concepts.keys()))
-  12
+  14
 
   >>> project = concepts['project']
   >>> task = concepts['task']
@@ -69,3 +69,17 @@ So if we add work items the corresponding efforts are summed up.
   >>> task02.addWorkItem('4711', 'work', effort=8 * 3600)
   >>> proj01.actualEffort
   u'23:00'
+
+
+Reporting
+---------
+
+### Tasks overview ###
+
+  >>> from cco.work.browser import TasksOverview
+  >>> view = TasksOverview(proj01, TestRequest())
+
+  >>> ri = view.reportInstance
+  >>> ri
+  <cco.work.report.TasksOverview object ...>
+

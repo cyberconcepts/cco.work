@@ -35,6 +35,8 @@ TypeInterfaceSourceList.typeInterfaces += (IProject, ITask)
 
 class TaskBase(AdapterBase):
 
+    start = end = None
+
     defaultStates = ['done', 'done_x', 'finished', 'finished_x']
 
     @property
@@ -97,7 +99,7 @@ class Task(TaskBase):
     implements(ITask)
 
     _adapterAttributes = AdapterBase._adapterAttributes + ('actualEffort',)
-    _contextAttributes = list(IProject)
+    _contextAttributes = list(ITask)
 
 
 # utility functions

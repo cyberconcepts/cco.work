@@ -12,10 +12,12 @@ from zope.app.testing.setup import placefulSetUp, placefulTearDown
 from cybertools.organize.work import workItemStates
 from cybertools.tracking.btree import TrackingStorage
 from loops.concept import Concept
+from loops.expert.report import IReport, IReportInstance, Report
 from loops.organize.work.base import WorkItem, WorkItems
 from loops.setup import addAndConfigureObject
 from loops.tests.setup import TestSite
 from cco.work.interfaces import IProject, ITask
+from cco.work.report import TasksOverview
 from cco.work.task import Project, Task
 
 
@@ -23,7 +25,10 @@ def setupComponents(loopsRoot):
     component.provideAdapter(WorkItems)
     component.provideUtility(workItemStates(), name='organize.workItemStates')
     component.provideAdapter(Project)
+    component.provideAdapter(Report)
     component.provideAdapter(Task)
+    component.provideAdapter(TasksOverview, provides=IReportInstance,
+                             name='cco.work.tasks_overview')
 
 
 def setUp(self):
@@ -42,6 +47,12 @@ def setUp(self):
     addAndConfigureObject(concepts, Concept, 'task',
             title='Task', conceptType=concepts['type'],
             typeInterface=ITask)
+    addAndConfigureObject(concepts, Concept, 'report',
+            title='Task', conceptType=concepts['type'],
+            typeInterface=IReport)
+    addAndConfigureObject(concepts, Concept, 'tasks_overview',
+            title='Tasks Overview', conceptType=concepts['report'],
+            reportType='cco.work.tasks_overview')
 
 
 def tearDown(self):

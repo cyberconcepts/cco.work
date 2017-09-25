@@ -3,6 +3,8 @@
    xmlns:browser="http://namespaces.zope.org/browser"
    i18n_domain="cco.work">
 
+  <!-- concept adapter classes -->
+
   <zope:adapter factory="cco.work.task.Project" trusted="True" />
   <zope:class class="cco.work.task.Project">
     <require permission="zope.View"
@@ -17,6 +19,30 @@
              interface="cco.work.interfaces.ITask" />
     <require permission="zope.ManageContent"
              set_schema="cco.work.interfaces.ITask" />
+  </zope:class>
+
+  <!-- application views -->
+
+  <zope:adapter
+        name="cco.work.tasks_overview.html"
+        for="loops.interfaces.IConcept
+             zope.publisher.interfaces.browser.IBrowserRequest"
+        provides="zope.interface.Interface"
+        factory="cco.work.browser.TasksOverview"
+        permission="loops.ViewRestricted" />
+
+  <!-- report instances -->
+
+  <zope:adapter 
+      name="cco.work.tasks_overview"
+      factory="cco.work.report.TasksOverview"
+      provides="loops.expert.report.IReportInstance"
+      trusted="True" />
+  <zope:class class="cco.work.report.TasksOverview">
+    <require permission="zope.View"
+             interface="loops.expert.report.IReportInstance" />
+    <require permission="zope.ManageContent"
+             set_schema="loops.expert.report.IReportInstance" />
   </zope:class>
 
 </configure>
