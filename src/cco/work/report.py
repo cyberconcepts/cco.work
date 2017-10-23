@@ -25,14 +25,17 @@ from loops.common import adapted, baseObject
 from loops.expert.field import Field, DecimalField, TargetField, UrlField
 from loops.expert.report import ReportInstance
 from loops.organize.work.report import DurationField
-from cco.work.interfaces import IProject, ITask
+from cco.work.interfaces import IProject, ITask, _
 
 
 task = UrlField('title', u'Task',
                 executionSteps=['sort', 'output'])
-estimatedEffort = DecimalField('estimatedEffort', u'Estimated Effort',
+estimatedEffort = DecimalField(
+                    'estimatedEffort', _(u'colheader_estimatedEffort'),
                 executionSteps=['output'])
-actualEffort = DecimalField('actualEffort', u'Actual Effort',
+quotedEffort = DecimalField('quotedEffort', _(u'colheader_quotedEffort'),
+                executionSteps=['output'])
+actualEffort = DecimalField('actualEffort', _(u'colheader_actualEffort'),
                 executionSteps=['output'])
 
 
@@ -41,7 +44,7 @@ class TasksOverview(ReportInstance):
     type = 'cco.work.tasks_overview'
     label = u'Tasks Overview'
 
-    fields = Jeep((task, estimatedEffort, actualEffort))
+    fields = Jeep((task, estimatedEffort, quotedEffort, actualEffort))
     defaultOutputFields = fields
     defaultSortCriteria = (task,)
 

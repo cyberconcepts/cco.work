@@ -28,7 +28,7 @@ from cybertools.organize.interfaces import ITask
 from loops.interfaces import ILoopsAdapter, IConceptSchema
 
 
-_ = MessageFactory('cco.schema')
+_ = MessageFactory('cco.work')
 
 
 # project and task management
@@ -36,13 +36,16 @@ _ = MessageFactory('cco.schema')
 class IProject(ILoopsAdapter):
 
     estimatedEffort = schema.Int(
-                title=_(u'Estimated Effort (hours)'),
-                description=_(
-                    u'The estimated effort in hours for completing this project.'),
+                title=_(u'label_estimatedEffort'),
+                description=_(u'desc_estimatedEffort'),
+                required=False,)
+    quotedEffort = schema.Int(
+                title=_(u'label_quotedEffort'),
+                description=_(u'desc_quotedEffort'),
                 required=False,)
     actualEffort = schema.Int(
-                title=_(u'Actual Effort (hours)'),
-                description=_(u'The actual effort in hours.'),
+                title=_(u'label_actualEffort'),
+                description=_(u'desc_actualEffort'),
                 readonly=True)
 
 
