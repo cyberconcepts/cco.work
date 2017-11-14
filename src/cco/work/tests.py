@@ -25,7 +25,7 @@ def setupComponents(loopsRoot):
     component.provideAdapter(WorkItems)
     component.provideUtility(workItemStates(), name='organize.workItemStates')
     component.provideAdapter(Project)
-    component.provideAdapter(Report)
+    component.provideAdapter(Report, provides=IReport)
     component.provideAdapter(Task)
     component.provideAdapter(TasksOverview, provides=IReportInstance,
                              name='cco.work.tasks_overview')
