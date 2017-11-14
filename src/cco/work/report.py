@@ -1,5 +1,5 @@
 #
-#  Copyright (c) 2016 Helmut Merz helmutm@cy55.de
+#  Copyright (c) 2017 Helmut Merz helmutm@cy55.de
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -25,10 +25,11 @@ from loops.common import adapted, baseObject
 from loops.expert.field import Field, DecimalField, TargetField, UrlField
 from loops.expert.report import ReportInstance
 from loops.organize.work.report import DurationField
+#from loops.organize.work.report import dayFrom, dayTo, party, activity
 from cco.work.interfaces import IProject, ITask, _
 
 
-task = UrlField('title', u'Task',
+task = UrlField('title', _(u'Task'),
                 executionSteps=['sort', 'output'])
 estimatedEffort = DecimalField(
                     'estimatedEffort', _(u'colheader_estimatedEffort'),
@@ -44,7 +45,9 @@ class TasksOverview(ReportInstance):
     type = 'cco.work.tasks_overview'
     label = u'Tasks Overview'
 
-    fields = Jeep((task, estimatedEffort, quotedEffort, actualEffort))
+    fields = Jeep((#dayFrom, dayTo, #activity,
+                   task, estimatedEffort, quotedEffort, actualEffort))
+    #userSettings = (dayFrom, dayTo, activity)
     defaultOutputFields = fields
     defaultSortCriteria = (task,)
 
