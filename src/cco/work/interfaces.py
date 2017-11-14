@@ -49,7 +49,7 @@ class IProject(ILoopsAdapter):
                 readonly=True)
 
 
-class ITask(IConceptSchema, ITask, ILoopsAdapter):
+class ITask(IConceptSchema, ITask, IProject):
 
     pass
 
