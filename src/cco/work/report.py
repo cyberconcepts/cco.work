@@ -29,7 +29,7 @@ from loops.organize.work.report import DurationField
 from cco.work.interfaces import IProject, ITask, _
 
 
-task = UrlField('title', _(u'Task'),
+task = UrlField('title', _(u'colheader_task'),
                 executionSteps=['sort', 'output'])
 estimatedEffort = DecimalField(
                     'estimatedEffort', _(u'colheader_estimatedEffort'),

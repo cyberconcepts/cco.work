@@ -3,7 +3,7 @@ msgstr ""
 
 "Project-Id-Version: 1.0\n"
 "POT-Creation-Date: 2017-10-23 12:00 CET\n"
-"PO-Revision-Date: 2017-10-23 12:00 CET\n"
+"PO-Revision-Date: 2017-11-14 12:00 CET\n"
 "Last-Translator: Helmut Merz <helmutm@cy55.de>\n"
 "Language-Team: cyberconcepts.org team <team@cyberconcepts.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,9 @@ msgid "desc_actualEffort"
 msgstr "The actual effort in hours."
 
 # reports
+
+msgid "colheader_task"
+msgstr "Project/Task"
 
 msgid "colheader_estimatedEffort"
 msgstr "Estimated Effort"
