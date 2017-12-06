@@ -57,6 +57,8 @@ class TaskBase(AdapterBase):
         return result
 
     def getAllTasks(self):
+        if self.__is_dummy__:
+            return []
         result = set([self])
         for t1 in self.getSubTasks():
             if t1 not in result:
