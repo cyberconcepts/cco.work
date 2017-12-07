@@ -34,6 +34,12 @@
         factory="cco.work.browser.TasksOverview"
         permission="loops.ViewRestricted" />
 
+  <!-- field instances -->
+
+  <zope:adapter 
+        name="duration"
+        factory="cco.work.interfaces.DurationFieldInstance" />
+
   <!-- report instances -->
 
   <zope:adapter 

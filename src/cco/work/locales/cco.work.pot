@@ -1,7 +1,7 @@
 
 "Project-Id-Version: 1.0\n"
 "POT-Creation-Date: 2017-10-23 12:00 CET\n"
-"PO-Revision-Date: 2017-10-23 12:00 CET\n"
+"PO-Revision-Date: 2017-12-07 12:00 CET\n"
 "Last-Translator: Helmut Merz <helmutm@cy55.de>\n"
 "Language-Team: cyberconcepts.org team <team@cyberconcepts.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,11 @@ msgstr "Estimated Effort (hours)"
 msgid "desc_estimatedEffort"
 msgstr "The estimated effort in hours for completing this project."
 
-msgid "label_quotedEffort"
-msgstr "Quoted Effort (hours)"
+msgid "label_chargedEffort"
+msgstr "Charged Effort (hours)"
 
-msgid "desc_quotedEffort"
-msgstr "The effort in hours for completing this project as given in a quote or offering."
+msgid "desc_chargedEffort"
+msgstr "The effort in hours for completing this project as charged to the customer."
 
 msgid "label_actualEffort"
 msgstr "Actual Effort (hours)"
@@ -34,8 +34,8 @@ msgstr "The actual effort in hours."
 msgid "colheader_estimatedEffort"
 msgstr "Estimated Effort"
 
-msgid "colheader_quotedEffort"
-msgstr "Quoted Effort"
+msgid "colheader_chargedEffort"
+msgstr "Charged Effort"
 
 msgid "colheader_actualEffort"
 msgstr "Actual Effort"

@@ -45,8 +45,7 @@ class TaskBase(AdapterBase):
         for t in self.getAllTasks():
             for wi in t.getWorkItems():
                 result += wi.effort
-        #return formatTimeDelta(result)
-        return round(result / 3600.0, 2)
+        return result
 
     def getSubTasks(self):
         result = []
@@ -102,15 +101,4 @@ class Task(TaskBase):
 
     _adapterAttributes = AdapterBase._adapterAttributes + ('actualEffort',)
     _contextAttributes = list(ITask)
-
-
-# utility functions
-
-def formatTimeDelta(value):
-    if not value:
-        return u'0:00'
-    h, m = divmod(int(value) / 60, 60)
-    if h > 24:
-        return str(int(round(h / 24.0)))
-    return u'%i:%02i' % (h, m)
 

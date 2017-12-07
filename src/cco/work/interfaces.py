@@ -24,6 +24,8 @@ from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface, Attribute
 from zope import interface, component, schema
 
+from cybertools.composer.schema.field import FieldInstance
+from cybertools.composer.schema.interfaces import FieldType
 from cybertools.organize.interfaces import ITask
 from loops.interfaces import ILoopsAdapter, IConceptSchema
 
@@ -31,22 +33,45 @@ from loops.interfaces import ILoopsAdapter, IConceptSchema
 _ = MessageFactory('cco.work')
 
 
+
+class Duration(schema.Int):
+
+    __typeInfo__ = ('duration',
+                    FieldType('textline',
+                              u'A field representing a duration in time.',
+                              instanceName='duration'))
+
+
+class DurationFieldInstance(FieldInstance):
+
+    def display(self, value):
+        if value is None:
+            return ''
+        return u'%02i:%02i' % divmod(value * self.factor / 60.0, 60)
+
+    @property
+    def factor(self):
+        return getattr(self.context.baseField, 'factor', 1)    
+
+
 # project and task management
 
 class IProject(ILoopsAdapter):
 
-    estimatedEffort = schema.Int(
+    estimatedEffort = Duration(
                 title=_(u'label_estimatedEffort'),
                 description=_(u'desc_estimatedEffort'),
                 required=False,)
-    quotedEffort = schema.Int(
-                title=_(u'label_quotedEffort'),
-                description=_(u'desc_quotedEffort'),
+    chargedEffort = Duration(
+                title=_(u'label_chargedEffort'),
+                description=_(u'desc_chargedEffort'),
                 required=False,)
-    actualEffort = schema.Int(
+    actualEffort = Duration(
                 title=_(u'label_actualEffort'),
                 description=_(u'desc_actualEffort'),
                 readonly=True)
+
+    estimatedEffort.factor = chargedEffort.factor = 3600
 
 
 class ITask(IConceptSchema, ITask, IProject):

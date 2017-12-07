@@ -19,11 +19,11 @@ msgstr "Geschätzter Aufwand (Stunden)"
 msgid "desc_estimatedEffort"
 msgstr "Der geschätzte Aufwand für das Projekt in Stunden."
 
-msgid "label_quotedEffort"
-msgstr "Aufwand lt. Angebot (Stunden)"
+msgid "label_chargedEffort"
+msgstr "Aufwand lt. Rechnung (Stunden)"
 
-msgid "desc_quotedEffort"
-msgstr "Der Aufwand für das Projekt in Stunden lt. Angebot."
+msgid "desc_chargedEffort"
+msgstr "Der dem Kunden in Rechnung gestellte Aufwand in Stunden."
 
 msgid "label_actualEffort"
 msgstr "Tatsächlicher Aufwand (Stunden)"
@@ -39,8 +39,8 @@ msgstr "Projekt/Aufgabe"
 msgid "colheader_estimatedEffort"
 msgstr "Geschätzter Aufwand"
 
-msgid "colheader_quotedEffort"
-msgstr "Aufwand lt. Angebot"
+msgid "colheader_chargedEffort"
+msgstr "Aufwand lt. Rechnung"
 
 msgid "colheader_actualEffort"
 msgstr "Tatsächlicher Aufwand"

@@ -31,13 +31,15 @@ from cco.work.interfaces import IProject, ITask, _
 
 task = UrlField('title', _(u'colheader_task'),
                 executionSteps=['sort', 'output'])
-estimatedEffort = DecimalField(
+estimatedEffort = DurationField(
                     'estimatedEffort', _(u'colheader_estimatedEffort'),
-                executionSteps=['output'])
-quotedEffort = DecimalField('quotedEffort', _(u'colheader_quotedEffort'),
-                executionSteps=['output'])
-actualEffort = DecimalField('actualEffort', _(u'colheader_actualEffort'),
-                executionSteps=['output'])
+                    factor = 3600,
+                    executionSteps=['output'])
+chargedEffort = DurationField('chargedEffort', _(u'colheader_chargedEffort'),
+                    factor = 3600,
+                    executionSteps=['output'])
+actualEffort = DurationField('actualEffort', _(u'colheader_actualEffort'),
+                    executionSteps=['output'])
 
 
 class TasksOverview(ReportInstance):
@@ -46,7 +48,7 @@ class TasksOverview(ReportInstance):
     label = u'Tasks Overview'
 
     fields = Jeep((#dayFrom, dayTo, #activity,
-                   task, estimatedEffort, quotedEffort, actualEffort))
+                   task, estimatedEffort, chargedEffort, actualEffort))
     #userSettings = (dayFrom, dayTo, activity)
     defaultOutputFields = fields
     defaultSortCriteria = (task,)
