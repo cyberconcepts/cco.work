@@ -63,7 +63,7 @@ So if we add work items the corresponding efforts are summed up.
 
   >>> task01.addWorkItem('4711', 'work', effort=15 * 3600)
   >>> proj01.actualEffort
-  15.0
+  54000.0
   
 u'15:00'
 
@@ -72,7 +72,7 @@ u'15:00'
   >>> baseObject(task02).assignParent(baseObject(proj01))
   >>> task02.addWorkItem('4711', 'work', effort=8 * 3600)
   >>> proj01.actualEffort
-  23.0
+  82800.0
 
 u'23:00'
 
