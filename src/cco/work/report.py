@@ -25,7 +25,6 @@ from loops.common import adapted, baseObject
 from loops.expert.field import Field, DecimalField, TargetField, UrlField
 from loops.expert.report import ReportInstance
 from loops.organize.work.report import DurationField
-#from loops.organize.work.report import dayFrom, dayTo, party, activity
 from cco.work.interfaces import IProject, ITask, _
 
 
@@ -34,12 +33,12 @@ task = UrlField('title', _(u'colheader_task'),
 estimatedEffort = DurationField(
                     'estimatedEffort', _(u'colheader_estimatedEffort'),
                     factor = 3600,
-                    executionSteps=['output'])
+                    executionSteps=['output', 'totals'])
 chargedEffort = DurationField('chargedEffort', _(u'colheader_chargedEffort'),
                     factor = 3600,
-                    executionSteps=['output'])
+                    executionSteps=['output', 'totals'])
 actualEffort = DurationField('actualEffort', _(u'colheader_actualEffort'),
-                    executionSteps=['output'])
+                    executionSteps=['output', 'totals'])
 
 
 class TasksOverview(ReportInstance):
@@ -47,8 +46,7 @@ class TasksOverview(ReportInstance):
     type = 'cco.work.tasks_overview'
     label = u'Tasks Overview'
 
-    fields = Jeep((#dayFrom, dayTo, #activity,
-                   task, estimatedEffort, chargedEffort, actualEffort))
+    fields = Jeep((task, estimatedEffort, chargedEffort, actualEffort))
     #userSettings = (dayFrom, dayTo, activity)
     defaultOutputFields = fields
     defaultSortCriteria = (task,)
