@@ -47,7 +47,10 @@ class DurationFieldInstance(FieldInstance):
     def display(self, value):
         if value is None:
             return ''
-        value = float(value)
+        try:
+            value = float(value)
+        except ValueError:
+            return 0.0
         return u'%02i:%02i' % divmod(value * self.factor / 60.0, 60)
 
     @property
