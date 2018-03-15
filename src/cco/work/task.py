@@ -88,8 +88,17 @@ class Project(TaskBase):
 
     implements(IProject)
 
-    _adapterAttributes = AdapterBase._adapterAttributes + ('actualEffort',)
+    _adapterAttributes = AdapterBase._adapterAttributes + (
+            'estimatedEffort', 'chargedEffort', 'actualEffort',)
     _contextAttributes = list(IProject)
+
+    @property
+    def estimatedEffort(self):
+        return sum(float(t.estimatedEffort or 0.0) for t in self.getSubTasks())
+
+    @property
+    def chargedEffort(self):
+        return sum(float(t.chargedEffort or 0.0) for t in self.getSubTasks())
 
 
 class Task(TaskBase):
@@ -98,6 +107,8 @@ class Task(TaskBase):
     """
 
     implements(ITask)
+
+    #estimatedEffort = chargedEffort = 0.0
 
     _adapterAttributes = AdapterBase._adapterAttributes + ('actualEffort',)
     _contextAttributes = list(ITask)

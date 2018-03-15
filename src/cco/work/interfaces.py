@@ -65,11 +65,11 @@ class IProject(ILoopsAdapter):
     estimatedEffort = Duration(
                 title=_(u'label_estimatedEffort'),
                 description=_(u'desc_estimatedEffort'),
-                required=False,)
+                readonly=True,)
     chargedEffort = Duration(
                 title=_(u'label_chargedEffort'),
                 description=_(u'desc_chargedEffort'),
-                required=False,)
+                readonly=True,)
     actualEffort = Duration(
                 title=_(u'label_actualEffort'),
                 description=_(u'desc_actualEffort'),
@@ -80,5 +80,14 @@ class IProject(ILoopsAdapter):
 
 class ITask(IConceptSchema, ITask, IProject):
 
-    pass
+    estimatedEffort = Duration(
+                title=_(u'label_estimatedEffort'),
+                description=_(u'desc_estimatedEffort'),
+                required=False,)
+    chargedEffort = Duration(
+                title=_(u'label_chargedEffort'),
+                description=_(u'desc_chargedEffort'),
+                required=False,)
+
+    estimatedEffort.factor = chargedEffort.factor = 3600
 

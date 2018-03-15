@@ -35,8 +35,6 @@ We start with creating a project and assigning an estimated effort to it.
   >>> proj01 = adapted(addAndConfigureObject(concepts, Concept, 'project01', 
   ...             title=u'Project #1', conceptType=project))
 
-  >>> proj01.estimatedEffort = 100
-
 When counting all assoctioated tasks we get just 1, the project itself.
 
   >>> len(proj01.getAllTasks())
@@ -76,6 +74,14 @@ u'15:00'
 
 u'23:00'
 
+The estimated and charged effords for tasks may be stored in 
+corresponding fields. Their sums are shown in the enclosing project.
+
+  >>> task01.estimatedEffort = 100
+  >>> task02.estimatedEffort = 15
+
+  >>> proj01.estimatedEffort
+  115.0
 
 Reporting
 ---------
