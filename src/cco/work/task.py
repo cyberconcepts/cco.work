@@ -94,11 +94,22 @@ class Project(TaskBase):
 
     @property
     def estimatedEffort(self):
-        return sum(float(t.estimatedEffort or 0.0) for t in self.getSubTasks())
+        return sum(self.tofloat(t.estimatedEffort or 0.0) 
+                    for t in self.getSubTasks())
 
     @property
     def chargedEffort(self):
-        return sum(float(t.chargedEffort or 0.0) for t in self.getSubTasks())
+        return sum(self.tofloat(t.chargedEffort or 0.0) 
+                    for t in self.getSubTasks())
+
+    @staticmethod
+    def tofloat(v):
+        if isinstance(v, basestring):
+            v = v.replace(',', '.')
+        try:
+            return float(v)
+        except ValueError:
+            return 0.0
 
 
 class Task(TaskBase):

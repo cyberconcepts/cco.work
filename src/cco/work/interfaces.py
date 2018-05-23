@@ -47,10 +47,12 @@ class DurationFieldInstance(FieldInstance):
     def display(self, value):
         if value is None:
             return ''
+        if isinstance(value, basestring):
+            value = value.replace(',', '.')
         try:
             value = float(value)
         except ValueError:
-            return 0.0
+            value = 0.0
         return u'%02i:%02i' % divmod(value * self.factor / 60.0, 60)
 
     @property
