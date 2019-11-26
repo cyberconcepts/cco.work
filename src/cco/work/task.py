@@ -48,6 +48,8 @@ class TaskBase(AdapterBase):
         return result
 
     def getSubTasks(self):
+        if self.__is_dummy__:
+            return []
         result = []
         for c in baseObject(self).getChildren():
             obj = adapted(c)
