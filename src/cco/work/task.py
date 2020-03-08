@@ -25,17 +25,23 @@ from zope.interface import implements
 
 from cybertools.organize.interfaces import IWorkItems
 from loops.common import AdapterBase, adapted, baseObject
+#from loops.organize.task import Task
 from loops.type import TypeInterfaceSourceList
 from loops import util
 from cco.work.interfaces import IProject, ITask
+
+#from cco.storage.loops import common
 
 
 TypeInterfaceSourceList.typeInterfaces += (IProject, ITask)
 
 
+#class TaskBase(common.AdapterBase):
 class TaskBase(AdapterBase):
 
-    start = end = None
+    _contextAttributes = list(ITask)
+
+    #start = end = None
 
     defaultStates = ['done', 'done_x', 'finished', 'finished_x']
 
